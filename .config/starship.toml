@@ -1,0 +1,139 @@
+scan_timeout = 10
+"$schema" = 'https://starship.rs/config-schema.json'
+#format = '$directory$line_break$all$time$cmd_duration$character'
+
+format = """
+[](fg:#7aa2f7)\
+$os\
+[ ](fg:#7aa2f7 bg:#1a1b26)\
+$directory\
+[ ](bg:#7aa2f7 fg:#1a1b26)\
+$git_branch\
+$git_status\
+[](fg:#7aa2f7)\
+$fill\
+$time\
+[](fg:#1a1b26)\
+$line_break\
+$character\
+"""
+
+right_format = """
+$cmd_duration
+$lua
+$rust
+$time
+"""
+
+[shell]
+disabled = false
+style = "bold"
+bash_indicator = "[\uebca](#a593e0)"
+nu_indicator = "[nu](#fff1b9)"
+powershell_indicator = "[psh](#f7aa97)"
+cmd_indicator = "[cmd](#a3daff)"
+
+[character]
+success_symbol = "[❯](bold #00ff00)"
+error_symbol = "[󰱭✘](bold #ff4444)"
+
+[directory]
+truncation_length = 6
+truncation_symbol = ' ' # nf-fa-folder_open
+truncate_to_repo = false
+home_symbol = ' ~' # nf-fa-home
+style = 'fg:#7aa2f7 bg:#1a1b26'
+read_only = ' 󰌾 ' # nf-md-lock
+read_only_style = 'fg:#f7768e bg:#1a1b26'
+format = '[$path]($style)[$read_only]($read_only_style)'
+
+[fill]
+symbol = '─'
+style = 'blue'
+
+[time]
+disabled = false
+style = 'fg:#73daca'
+format = '[   $time]($style)' # nf-pl-right_soft_divider, nf-fa-clock_o
+time_format = '%T'
+utc_time_offset = '+9'
+
+[cmd_duration]
+format = "[$duration]($style) "
+show_milliseconds = true
+style = "bold #ff9900"
+min_time = 1_000
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"
+
+[git_commit]
+commit_hash_length = 4
+tag_symbol = '🔖 '
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[🍒 PICKING](bold red)'
+
+[git_branch]
+format = "[ $symbol$branch(:$remote_branch)]($style)"
+# format = "[$symbol$branch(:$remote_branch)]($style) "
+style = "bg:#7aa2f7 fg:#1a1b26"
+symbol = "  "
+
+[git_status]
+style = 'fg:#e0af68 bg:#1a1b26'
+
+conflicted = '='
+ahead = '⇡${count}'
+behind = '⇣${count}'
+
+diverged = '⇕'
+up_to_date = '✓'
+untracked = '?'
+stashed = '$'
+modified = '!${count}'
+renamed = '»'
+deleted = '✘'
+format = '([\[$all_status$ahead_behind\]]($style))'
+
+[username]
+style_user = "white bold"
+style_root = "black bold"
+format = "[$user🌱]($style) "
+disabled = false
+show_always = true
+
+[c]
+disabled = true
+
+[golang]
+disabled = true
+
+[python]
+disabled = true
+
+[rust]
+disabled = true
+
+[lua]
+disabled = true
+symbol = " "
+
+[scala]
+symbol = " "
+
+[os]
+format = "[$symbol]($style)"
+style = 'fg:#1a1b26 bg:#7aa2f7'
+disabled = false
+
+[os.symbols]
+Alpine = " "
+Debian = " "
+Linux = " "
+Mint = " "
+Raspbian = " "
+Ubuntu = " "
+Unknown = " "
+Windows = "󰍲 "
