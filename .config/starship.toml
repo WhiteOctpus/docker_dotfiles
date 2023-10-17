@@ -1,31 +1,19 @@
 scan_timeout = 10
 "$schema" = 'https://starship.rs/config-schema.json'
-#format = '$directory$line_break$all$time$cmd_duration$character'
+#format = '$all$directory$line_break$all$time$cmd_duration$character'
 
 format = """
-$container\
 $all\
-[](fg:#7aa2f7)\
+$container\
 $os\
-[ ](fg:#7aa2f7 bg:#1a1b26)\
 $directory\
-[ ](bg:#7aa2f7 fg:#1a1b26)\
 $git_branch\
 $git_status\
-[](fg:#7aa2f7)\
-$fill\
-$time\
-[](fg:#1a1b26)\
 $line_break\
+$username\
 $character\
 """
 
-right_format = """
-$cmd_duration
-$lua
-$rust
-$time
-"""
 [container]
 format = '[$symbol \[$name\]]($style) '
 
@@ -46,7 +34,6 @@ truncation_length = 6
 truncation_symbol = ' ' # nf-fa-folder_open
 truncate_to_repo = false
 home_symbol = ' ~' # nf-fa-home
-style = 'fg:#7aa2f7 bg:#1a1b26'
 read_only = ' 󰌾 ' # nf-md-lock
 read_only_style = 'fg:#f7768e bg:#1a1b26'
 format = '[$path]($style)[$read_only]($read_only_style)'
@@ -67,6 +54,7 @@ format = "[$duration]($style) "
 show_milliseconds = true
 style = "bold #ff9900"
 min_time = 1_000
+disabled = true
 
 [docker_context]
 format = "via [🐋 $context](blue bold)"
@@ -81,20 +69,18 @@ cherry_pick = '[🍒 PICKING](bold red)'
 
 [git_branch]
 format = "[ $symbol$branch(:$remote_branch)]($style)"
-# format = "[$symbol$branch(:$remote_branch)]($style) "
-style = "bg:#7aa2f7 fg:#1a1b26"
-symbol = "  "
+symbol = " "
 
 [git_status]
-style = 'fg:#e0af68 bg:#1a1b26'
+#style = 'fg:#e0af68 bg:#1a1b26'
 conflicted = '='
 ahead = '⇡${count}'
 behind = '⇣${count}'
 diverged = '⇕'
-up_to_date = '✓'
+up_to_date = '󰚰'
 untracked = '?'
 stashed = '$'
-modified = '!${count}'
+modified = '󰙏${count}'
 renamed = '»'
 deleted = '✘'
 format = '([\[$all_status$ahead_behind\]]($style))'
