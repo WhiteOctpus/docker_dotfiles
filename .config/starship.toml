@@ -20,7 +20,7 @@ format = '[$symbol \[$name\]]($style) '
 [shell]
 disabled = false
 style = "bold"
-bash_indicator = "[\uebca](#a593e0)"
+bash_indicator = "[󱆃](#a593e0)"
 nu_indicator = "[nu](#fff1b9)"
 powershell_indicator = "[psh](#f7aa97)"
 cmd_indicator = "[cmd](#a3daff)"
@@ -33,7 +33,7 @@ error_symbol = "[󰱭✘](bold #ff4444)"
 truncation_length = 6
 truncation_symbol = ' ' # nf-fa-folder_open
 truncate_to_repo = false
-home_symbol = ' ~' # nf-fa-home
+home_symbol = '󰋞~' # nf-fa-home
 read_only = ' 󰌾 ' # nf-md-lock
 read_only_style = 'fg:#f7768e bg:#1a1b26'
 format = '[$path]($style)[$read_only]($read_only_style)'
@@ -43,7 +43,7 @@ symbol = '─'
 style = 'blue'
 
 [time]
-disabled = false
+disabled = true
 style = 'fg:#73daca'
 format = '[   $time]($style)' # nf-pl-right_soft_divider, nf-fa-clock_o
 time_format = '%T'
@@ -69,24 +69,25 @@ cherry_pick = '[🍒 PICKING](bold red)'
 
 [git_branch]
 format = "[ $symbol$branch(:$remote_branch)]($style)"
-symbol = " "
+symbol = ""
+style = 'fg:yellow'
 
 [git_status]
-#style = 'fg:#e0af68 bg:#1a1b26'
+style = 'fg:yellow'
 conflicted = '='
 ahead = '⇡${count}'
 behind = '⇣${count}'
 diverged = '⇕'
-up_to_date = '󰚰'
+up_to_date = ''
 untracked = '?'
 stashed = '$'
-modified = '󰙏${count}'
+modified = '!${count}'
 renamed = '»'
 deleted = '✘'
 format = '([\[$all_status$ahead_behind\]]($style))'
 
 [username]
-style_user = "white bold"
+style_user = "gold bold"
 style_root = "black bold"
 format = "[$user🌱]($style) "
 disabled = false
@@ -114,7 +115,7 @@ symbol = " "
 [os]
 format = "[$symbol]($style)"
 style = 'fg:#1a1b26 bg:#7aa2f7'
-disabled = false
+disabled = true
 
 [os.symbols]
 Alpine = " "
