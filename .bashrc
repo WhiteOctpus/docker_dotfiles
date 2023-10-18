@@ -3,11 +3,14 @@
 # for examples
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -20,17 +23,21 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -77,54 +84,113 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# Scripts definitions when boot terminal
-# You may want to run the script when boot terminal,
-# put all your scripts into a separate file like ~/.bash_boot_scripts,
-# instead of adding them here directly.
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-if [ -d ~/.bash_boot_scripts ]; then
-    for filename in `ls -a ~/.bash_boot_scripts`; do
-        if [ $filename != "." ] && [ $filename != ".." ]; then
-            sh ~/.bash_boot_scripts/$filename
-        fi
-    done
-fi
+# some more ls aliases
+#alias lll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias ll='ls -aFl'
+
+alias cls='clear'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
-# You may want to put all your additional aliases into a separate file
-# like ~/.bash_aliases, instead of adding them here directly.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -d ~/.bash_aliases ]; then
-    for filename in `ls -a ~/.bash_aliases`; do
-        if [ $filename != "." ] && [ $filename != ".." ]; then
-            . ~/.bash_aliases/$filename
-        fi
-    done
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
-
-# Software configurations.
-# You may want to put all your additional software configrations
-# into a separate file like ~/.software_configurations,
-# instead of adding them here directly.
-
-if [ -d ~/.software_configurations ]; then
-    for filename in `ls -a ~/.software_configurations`; do
-        if [ $filename != "." ] && [ $filename != ".." ]; then
-            . ~/.software_configurations/$filename
-        fi
-    done
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
 fi
 
-# Supports Japanese
-export LANG=ja_JP.UTF-8
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+#2023.09.19
+export LANG=ja_JP.UTF-8
+. "$HOME/.cargo/env"
+
+#2023.09.20 lushay setup
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+
+
+
+#2023.09.23 powerline
+if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  source /usr/share/powerline/bindings/bash/powerline.sh
+fi
+
+
+
+########################
+#2023.09.26 openJDK
+########################
+export JAVA_HOME=/usr/lib/jvm/java-1.18.0-openjdk-amd64
+export PATH=/usr/lib/jvm/java-1.18.0-openjdk-amd64/bin:$PATH
+export CLASSPATH=.:/usr/lib/jvm/java-1.18.0-openjdk-amd64/lib
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+export EDITOR='nvim'
+export SHELL='bash'
+
+########################
+#2023.10.07 tmux
+########################
+#if [ $SHLVL = 1 ]; then
+#  tmux
+#fi
+
+########################
+# 2023.10.15 starship
+########################
 eval "$(starship init bash)"
+
+
+########################
+# 2023.10.14 deno
+########################
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+########################
+# 2023.10.15 coursier/cs
+########################
+export PATH="$PATH:/home/tmss/.local/share/coursier/bin"
+
+
+#2023.10.11
+########################
+# chezmoi
+########################
+
+export PATH=$PATH:'/mnt/c/Program Files/Microsoft VS Code/bin'
+
+
+
+
 
