@@ -51,3 +51,23 @@ hook_add = 'source ~/.local/share/dein/plugins/scrollbar.lua'
 [[plugins]]
 repo = 'vim-denops/denops.vim'
 rev = 'v5.0.0'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+on_i = 1
+merged = '0'
+#hook_add = 'source ~/.local/share/dein/plugins/coc-vim.vim'
+
+[[plugins]]
+repo = 'derekwyatt/vim-scala'
+hook_add = "au BufRead , BufNewFile *. sbt set filetype = scala"
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = 'source ~/.local/share/dein/plugins/indentLine.vim'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+
