@@ -134,19 +134,18 @@ export LANG=ja_JP.UTF-8
 ########################
 #2023.09.26 openJDK
 ########################
-export JAVA_HOME=/usr/lib/jvm/java-1.18.0-openjdk-amd64
-export PATH=/usr/lib/jvm/java-1.18.0-openjdk-amd64/bin:$PATH
-export CLASSPATH=.:/usr/lib/jvm/java-1.18.0-openjdk-amd64/lib
+#export JAVA_HOME=/usr/lib/jvm/java-1.18.0-openjdk-amd64
+#export PATH=/usr/lib/jvm/java-1.18.0-openjdk-amd64/bin:$PATH
+#export CLASSPATH=.:/usr/lib/jvm/java-1.18.0-openjdk-amd64/lib
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export PATH="$HOME/.rbenv/bin:$PATH"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-export EDITOR='nvim'
-export SHELL='bash'
+#eval "$(rbenv init -)"
+#export EDITOR='nvim'
+#export SHELL='bash'
 
 
 ########################
