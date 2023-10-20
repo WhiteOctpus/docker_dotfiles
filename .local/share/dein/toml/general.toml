@@ -65,7 +65,9 @@ hook_add = "au BufRead , BufNewFile *. sbt set filetype = scala"
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
-hook_add = 'source ~/.local/share/dein/plugins/indentLine.vim'
+hook_add = '''
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+'''
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
