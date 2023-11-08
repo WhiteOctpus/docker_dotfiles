@@ -121,16 +121,6 @@ fi
 #2023.09.19
 export LANG=ja_JP.UTF-8
 
-#2023.09.23 powerline
-#if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
-#  powerline-daemon -q
-#  POWERLINE_BASH_CONTINUATION=1
-#  POWERLINE_BASH_SELECT=1
-#  source /usr/share/powerline/bindings/bash/powerline.sh
-#fi
-
-
-
 ########################
 #2023.09.26 openJDK
 ########################
@@ -160,7 +150,3 @@ eval "$(starship init bash)"
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-########################
-# 2023.10.15 coursier/cs
-########################
-export PATH="$PATH:~/.local/share/coursier/bin"
