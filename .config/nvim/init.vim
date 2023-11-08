@@ -11,15 +11,15 @@ set expandtab
 set splitright
 
 " Set Dein base path (required)
-let s:dein_base = '/root/.local/share/dein'
+let s:dein_base = '~/.local/share/dein'
 
 " Set Dein source path (required)
-let s:dein_src = '/root/.local/share/dein/repos/github.com/Shougo/dein.vim'
+let s:dein_src = '~/.local/share/dein/repos/github.com/Shougo/dein.vim'
 
 " Set Dein toml path (option)
-let s:general_toml = '/root/.local/share/dein/toml/general.toml'
-let s:dark_powered_toml = '/root/.local/share/dein/toml/dark_powered.toml'
-let s:general_lazy_toml = '/root/.local/share/dein/toml/general_lazy.toml'
+let s:general_toml = '~/.local/share/dein/toml/general.toml'
+let s:dark_powered_toml = '~/.local/share/dein/toml/dark_powered.toml'
+let s:general_lazy_toml = '~/.local/share/dein/toml/general_lazy.toml'
 
 " Set Dein runtime path (required)
 execute 'set runtimepath+=' . s:dein_src
